@@ -35,6 +35,7 @@ public class WikiNodeIterable implements Iterable<Node> {
 	public Iterator<Node> iterator() {
 		return new WikiNodeIterator(root);
 	}
+	
 
 	/**
 	 * Inner class that implements the Iterator.

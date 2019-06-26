@@ -1,6 +1,12 @@
 package ch6;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,7 +32,7 @@ public class Crawler {
 		Elements paragraphs = content.select("p");
 		Element firstPara = paragraphs.get(1);
 //		System.out.println(firstPara);
-
+		
 		Iterable<Node> iter = new WikiNodeIterable(firstPara);
 
 		for (Node node : iter) {
@@ -44,8 +50,9 @@ public class Crawler {
 			recursiveDFS(child);
 		}
 	}
+	
 
-	/*// パラメータを私たちが探索するツリーのrootです。 また,私たちはstackを生成し,rootを入れます。
+	// パラメータを私たちが探索するツリーのrootです。 また,私たちはstackを生成し,rootを入れます。
 	private static void iterativeDFS(Node root) {
 		
 		Deque<Node> stack = new ArrayDeque<Node>();
@@ -72,5 +79,5 @@ public class Crawler {
 				stack.push(child);
 			}
 		}
-	}*/
+	}
 }
