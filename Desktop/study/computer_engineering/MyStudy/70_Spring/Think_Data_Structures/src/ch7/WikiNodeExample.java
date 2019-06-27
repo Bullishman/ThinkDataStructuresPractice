@@ -29,7 +29,7 @@ public class WikiNodeExample {
 				
 		// TODO: avoid selecting paragraphs from sidebars and boxouts
 		Elements paras = content.select("p");
-		Element firstPara = paras.get(0);
+		Element firstPara = paras.get(1);
 		
 		// 上記のコードは,URLで設定されたタグの内容を持ってくる基礎的なステップです。
 		
@@ -42,7 +42,9 @@ public class WikiNodeExample {
 		Iterable<Node> iter = new WikiNodeIterable(firstPara);
 		for (Node node: iter) {
 			if (node instanceof TextNode) {
-				System.out.print(node);
+//				System.out.print(node);
+				String str = ((TextNode) node).text();
+				System.out.print(((TextNode) node).text());
 			}
 		}
 	}
