@@ -100,13 +100,27 @@ public class WikiPhilosophy {
 	 */
 	public static Element getFirstValidLink(String url) throws IOException {
 		print("Fetching %s...", url);
-		Elements paragraphs = wf.fetchWikipedia(url);
+		Elements paragraphs = wf.fetchWikipedia(url, 0);
 		System.out.println("paragraphs : " + paragraphs);
 		
 		WikiParser wp = new WikiParser(paragraphs);
 		System.out.println("wp : " + wp);
 		
 		Element elt = wp.findFirstLink();
+//		System.out.println(elt.tag());
+//		System.out.println(elt.getAllElements());
+		System.out.println(elt.hasAttr("href"));
+		System.out.println(elt.html());
+		
+//		System.out.println("elt.text().contains(\"wiki\"): " + elt.text().contains("wiki"));
+//		if (elt.text().contains("'")) System.out.println("됬다시발");;
+		if (elt.text().contains("'")) {
+			WikiFetcher wikiFetcher = new WikiFetcher();
+			wikiFetcher.setFlag(1);
+			System.out.println("wikiFetcher.getFlag() : " + wikiFetcher.getFlag());
+			wf.fetchWikipedia(url, wikiFetcher.getFlag());
+		}
+		
 		return elt;
 	}
 

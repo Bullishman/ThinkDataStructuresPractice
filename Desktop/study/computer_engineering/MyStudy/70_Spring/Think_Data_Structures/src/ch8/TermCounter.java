@@ -145,7 +145,7 @@ public class TermCounter {
 		String url = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 
 		WikiFetcher wf = new WikiFetcher();
-		Elements paragraphs = wf.fetchWikipedia(url);
+		Elements paragraphs = wf.fetchWikipedia(url, 0);
 
 		TermCounter counter = new TermCounter(url.toString());
 		counter.processElements(paragraphs);

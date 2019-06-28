@@ -15,6 +15,15 @@ import org.jsoup.select.Elements;
 public class WikiFetcher {
 	private long lastRequestTime = -1;
 	private long minInterval = 1000;
+	public int flag;
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 
 	/**
 	 * Fetches and parses a URL string, returning a list of paragraph elements.
@@ -23,7 +32,7 @@ public class WikiFetcher {
 	 * @return
 	 * @throws IOException
 	 */
-	public Elements fetchWikipedia(String url) throws IOException {
+	public Elements fetchWikipedia(String url, int num) throws IOException {
 		sleepIfNeeded();
 
 		// download and parse the document
@@ -34,7 +43,22 @@ public class WikiFetcher {
 		Element content = doc.getElementById("mw-content-text");
 
 		// TODO: avoid selecting paragraphs from sidebars and boxouts
-		Elements paras = content.select("p");
+//		Elements paras = content.select("p");
+		Elements paras = null;
+		if (num == 1) {
+			System.out.println("num : " + 1);
+			paras = content.select("ul li a");
+//			paras = content1.select("a");
+			System.out.println(paras.text());
+			System.out.println("");
+			System.out.println("");
+			
+		} else if (num == 0) {
+			System.out.println("num : " + 0);
+			paras = content.select("p");
+			System.out.println(paras.text());
+		}
+		
 		return paras;
 	}
 
@@ -65,6 +89,7 @@ public class WikiFetcher {
 		Element content = doc.getElementById("mw-content-text");
 		System.out.println("content : " + content);
 		Elements paras = content.select("p");
+		Elements paras1 = content.select("ul");
 		Element paragraph = paras.get(1);
 		return paras;
 	}
